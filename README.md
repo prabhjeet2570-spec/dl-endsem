@@ -20,8 +20,8 @@ All experiments were run on Google Colab.
 ├── README.md
 ├── requirements.txt
 ├── best_solution/              # Best training + inference notebooks
-│   ├── train_v19.ipynb
-│   └── inference_multi_epoch_ensemble.ipynb
+│   ├── train_best.ipynb
+│   └── inference_best.ipynb
 ├── solution1/                  # Baseline: vanilla LoRA fine-tune
 │   ├── baseline_lora.ipynb
 │   └── submission-0.78068.csv
