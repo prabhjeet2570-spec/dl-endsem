@@ -70,7 +70,7 @@ All experiments were run on Google Colab.
 ├── solution16/                 # Focal loss + 40K + hybrid TTA
 │   ├── focal_loss_40k_hybrid_tta.ipynb
 │   └── submission-0.91348.csv
-├── solution17/                 # Metadata + captions + augmentation + new prompt (metadata+captions+new ending)
+├── solution17/                 # Metadata + captions + augmentation + new prompt
 │   ├── metadata_captions_prompt.ipynb
 │   └── submission-0.85714.csv
 ├── solution18/                 # Metadata in prompt
