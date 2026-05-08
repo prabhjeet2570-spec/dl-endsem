@@ -11,7 +11,7 @@ This repository contains all code for fine-tuning [SmolVLM-500M-Instruct](https:
 
 The approach uses Low-Rank Adaptation with Weight-Decomposed LoRA (DoRA), training only 4.79M parameters (under 1% of the model). Key techniques that drove accuracy from 0.78068 to 0.92555 include balanced factorial augmentation (expanding 3,109 training samples to 40,000), hybrid test-time augmentation, and multi-epoch checkpoint ensembling.
 
-All experiments were run on Google Colab (T4 GPU, 15GB VRAM).
+All experiments were run on Google Colab.
 
 ## Repository Structure
 
@@ -19,71 +19,74 @@ All experiments were run on Google Colab (T4 GPU, 15GB VRAM).
 .
 ├── README.md
 ├── requirements.txt
+├── best_solution/              # Best training + inference notebooks
+│   ├── train_v19.ipynb
+│   └── inference_multi_epoch_ensemble.ipynb
 ├── solution1/                  # Baseline: vanilla LoRA fine-tune
-│   ├── train_v1.ipynb
+│   ├── baseline_lora.ipynb
 │   └── submission-0.78068.csv
 ├── solution2/                  # Logit scoring inference
-│   ├── train_v2.ipynb
+│   ├── logit_scoring_inference.ipynb
 │   └── submission-0.72635.csv
 ├── solution3/                  # Prompt ensembling + calibration
-│   ├── train_v3.ipynb
+│   ├── prompt_ensembling_calibration.ipynb
 │   └── submission-0.74647.csv
 ├── solution4/                  # All-linear LoRA r=8
-│   ├── train_v4.ipynb
+│   ├── all_linear_lora_r8.ipynb
 │   └── submission-0.76458.csv
 ├── solution5/                  # 768px resolution
-│   ├── train_v5.ipynb
+│   ├── resolution_768px.ipynb
 │   └── submission-0.79476.csv
 ├── solution6/                  # Metadata + choice shuffling
-│   ├── train_v6.ipynb
+│   ├── metadata_choice_shuffling.ipynb
 │   └── submission-0.79275.csv
 ├── solution7/                  # MLP-only LoRA
-│   ├── train_v7.ipynb
+│   ├── mlp_only_lora.ipynb
 │   └── submission-0.77464.csv
 ├── solution8/                  # DoRA
-│   ├── train_v8.ipynb
+│   ├── dora.ipynb
 │   └── submission-0.80080.csv
 ├── solution9/                  # Connector LoRA
-│   ├── train_v9.ipynb          (train_v14.ipynb)
+│   ├── connector_lora.ipynb
 │   └── submission-0.89134.csv
 ├── solution10/                 # DoRA + label smoothing + 3x shuffling
-│   ├── train_v10.ipynb
+│   ├── label_smoothing_3x_shuffle.ipynb
 │   └── submission-0.88128.csv
 ├── solution11/                 # 512px, batch=8, grad_accum=2
-│   ├── train_v11.ipynb
+│   ├── native_512px.ipynb
 │   └── submission-0.88329.csv
 ├── solution12/                 # MLP LoRA (down_proj), r=13, 5-choice oversample
-│   ├── train_v12.ipynb
+│   ├── down_proj_5choice_oversample.ipynb
 │   └── submission-0.88732.csv
 ├── solution13/                 # Balanced factorial augmentation (~5K/type)
-│   ├── train_v13.ipynb
+│   ├── balanced_factorial_20k.ipynb
 │   └── submission-0.89939.csv
 ├── solution14/                 # LoRA r=18, alpha=36, 6 epochs
-│   ├── train_v16.ipynb
+│   ├── rank18_alpha36_6epochs.ipynb
 │   └── submission-0.91549.csv
-├── solution15/                 # Full TTA on v16 adapter (inference-only)
-│   ├── train_v16_tta.ipynb
+├── solution15/                 # Full TTA on solution 14 adapter (inference-only)
+│   ├── full_tta.ipynb
 │   └── submission-0.92354.csv
 ├── solution16/                 # Focal loss + 40K + hybrid TTA
-│   ├── train_v20.ipynb
+│   ├── focal_loss_40k_hybrid_tta.ipynb
 │   └── submission-0.91348.csv
 ├── solution17/                 # Kitchen sink (metadata+captions+new ending)
-│   ├── train_v17.ipynb
+│   ├── metadata_captions_prompt.ipynb
 │   └── submission-0.85714.csv
 ├── solution18/                 # Metadata in prompt
-│   ├── train_v18.ipynb
+│   ├── metadata_in_prompt.ipynb
 │   └── submission-0.87525.csv
 ├── solution19/                 # 40K dataset (10K per type)
-│   ├── train_v19.ipynb
+│   ├── balanced_factorial_40k.ipynb
 │   └── submission-0.91951.csv
-├── solution20/                 # Hybrid TTA on v19 (inference-only)
-│   ├── inference_hybrid_tta.ipynb
+├── solution20/                 # Hybrid TTA on solution 19 (inference-only)
+│   ├── hybrid_tta.ipynb
 │   └── submission-0.92354.csv
 ├── solution21/                 # Multi-epoch ensemble + hybrid TTA (BEST)
-│   ├── inference_multi_epoch_ensemble.ipynb
+│   ├── multi_epoch_ensemble_hybrid_tta.ipynb
 │   └── submission-0.92555.csv
 └── solution22/                 # Curriculum learning
-    ├── train_v21.ipynb
+    ├── curriculum_learning.ipynb
     └── submission-0.90744.csv
 ```
 
@@ -144,7 +147,7 @@ Solution 21 combines the adapter trained in Solution 19 with a multi-epoch check
 
 ### Prerequisites
 
-- Google Colab account (free tier with T4 GPU works)
+- Google Colab account
 - Kaggle competition data: download from the "Pixels to Predictions" competition page
 - Google Drive storage for data and checkpoints
 
@@ -173,7 +176,7 @@ Solution 21 combines the adapter trained in Solution 19 with a multi-epoch check
 1. Open `solution19/train_v19.ipynb` in Google Colab
 2. Run Cell 0 to install dependencies, then **restart the runtime**
 3. Run all remaining cells
-4. Training takes approximately 3-4 hours on a T4 GPU
+4. Training takes approximately 3-4 hours
 5. Per-epoch checkpoints are saved to Google Drive under `checkpoints_v19/`
 
 ### Generating the Best Submission (Solution 21)
@@ -210,10 +213,7 @@ See `requirements.txt` for exact versions.
 
 ## Hardware
 
-All experiments were run on **Google Colab free tier**:
-- GPU: NVIDIA Tesla T4 (15GB VRAM)
-- RAM: ~12GB system memory
-- Training time per run: 1-4 hours depending on dataset size and epochs
+All experiments were run on **Google Colab**. Training time per run: 1-4 hours depending on dataset size and epochs.
 
 ## Key Takeaways
 
