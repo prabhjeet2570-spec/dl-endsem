@@ -1,6 +1,7 @@
 # Checkpoint and adapter zips (too large for GitHub)
 *.zip
 checkpoints*/
+!best_solution/checkpoints/
 
 # macOS
 .DS_Store
