@@ -112,7 +112,7 @@ Each `solutionN/` directory contains the Jupyter notebook and the Kaggle submiss
 | 14 | LoRA r=18, alpha=36, 6 epochs | 0.91549 |
 | 15 | Full TTA on solution 14 adapter (inference-only) | 0.92354 |
 | 16 | Focal loss + 40K + hybrid TTA | 0.91348 |
-| 17 | Metadata + captions + augmentation + new prompt (metadata+captions+new prompt ending) | 0.85714 |
+| 17 | Metadata + captions + augmentation + new prompt | 0.85714 |
 | 18 | Metadata in prompt | 0.87525 |
 | 19 | 40K dataset (10K per type) | 0.91951 |
 | 20 | Hybrid TTA on solution 19 (inference-only) | 0.92354 |
