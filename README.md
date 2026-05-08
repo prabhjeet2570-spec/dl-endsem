@@ -70,7 +70,7 @@ All experiments were run on Google Colab.
 ├── solution16/                 # Focal loss + 40K + hybrid TTA
 │   ├── focal_loss_40k_hybrid_tta.ipynb
 │   └── submission-0.91348.csv
-├── solution17/                 # Kitchen sink (metadata+captions+new ending)
+├── solution17/                 # Metadata + captions + augmentation + new prompt (metadata+captions+new ending)
 │   ├── metadata_captions_prompt.ipynb
 │   └── submission-0.85714.csv
 ├── solution18/                 # Metadata in prompt
@@ -112,7 +112,7 @@ Each `solutionN/` directory contains the Jupyter notebook and the Kaggle submiss
 | 14 | LoRA r=18, alpha=36, 6 epochs | 0.91549 |
 | 15 | Full TTA on solution 14 adapter (inference-only) | 0.92354 |
 | 16 | Focal loss + 40K + hybrid TTA | 0.91348 |
-| 17 | Kitchen sink (metadata+captions+new prompt ending) | 0.85714 |
+| 17 | Metadata + captions + augmentation + new prompt (metadata+captions+new prompt ending) | 0.85714 |
 | 18 | Metadata in prompt | 0.87525 |
 | 19 | 40K dataset (10K per type) | 0.91951 |
 | 20 | Hybrid TTA on solution 19 (inference-only) | 0.92354 |
@@ -213,7 +213,7 @@ See `requirements.txt` for exact versions.
 
 ## Hardware
 
-All experiments were run on **Google Colab**. Training time per run: 1-4 hours depending on dataset size and epochs.
+All experiments were run on **Google Colab**.
 
 ## Key Takeaways
 
@@ -221,4 +221,4 @@ All experiments were run on **Google Colab**. Training time per run: 1-4 hours d
 2. **Balanced factorial augmentation** (solution 13-14): permuting answer choices to equalize training samples across 2/3/4/5-choice types was critical for pushing past 0.90.
 3. **Hybrid TTA outperforms uniform TTA**: full permutation ensembling helps 2/3-choice questions but hurts 4/5-choice questions due to noise from too many permutations.
 4. **Multi-epoch ensembling** (solution 21): averaging logits across multiple epoch checkpoints (3, 4, 5, 6) smooths variance and adds +0.006 over the best single checkpoint.
-5. **Kitchen-sink approaches fail** (solution 17): adding metadata, captions, and prompt changes simultaneously dropped accuracy by 6 points.
+5. **Changing everything at once fails** (solution 17): adding metadata, captions, and prompt changes simultaneously dropped accuracy by 6 points.
