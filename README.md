@@ -140,7 +140,7 @@ Solution 21 combines the adapter trained in Solution 19 with a multi-epoch check
 
 **Inference (Solution 21):**
 - Multi-epoch ensemble: average logits from epoch 3, 4, 5, 6 checkpoints
-- Hybrid TTA: full permutation ensembling for 2/3-choice questions, identity-only for 4/5-choice questions
+- Hybrid TTA: single-pass for 2-choice questions, full permutation ensembling for 3/4/5-choice questions
 - Combined via logit averaging across epochs and permutations
 
 ## How to Reproduce
@@ -217,8 +217,8 @@ All experiments were run on **Google Colab**.
 
 ## Key Takeaways
 
-1. **Connector LoRA was the single biggest jump** (solution 9): targeting the vision-language connector modules gave a +9 point accuracy gain over attention-only LoRA.
+1. **Data augmentation was the single biggest jump** (solution 10): label smoothing + choice shuffling gave a +8 point accuracy gain over the best architecture-only model.
 2. **Balanced factorial augmentation** (solution 13-14): permuting answer choices to equalize training samples across 2/3/4/5-choice types was critical for pushing past 0.90.
-3. **Hybrid TTA outperforms uniform TTA**: full permutation ensembling helps 2/3-choice questions but hurts 4/5-choice questions due to noise from too many permutations.
+3. **Hybrid TTA outperforms uniform TTA**: full permutation ensembling helps 3/4/5-choice questions but hurts 2-choice questions, where only 2 permutations amplify position bias rather than canceling it.
 4. **Multi-epoch ensembling** (solution 21): averaging logits across multiple epoch checkpoints (3, 4, 5, 6) smooths variance and adds +0.006 over the best single checkpoint.
 5. **Changing everything at once fails** (solution 17): adding metadata, captions, and prompt changes simultaneously dropped accuracy by 6 points.
