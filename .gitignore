@@ -1,0 +1,27 @@
+# Checkpoint and adapter zips (too large for GitHub)
+*.zip
+checkpoints*/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+
+# Files not part of the project repo
+pixels-to-predictions/
+midsem-reports/
+report.md
+DL_Endsem_Report/
+DL_Endsem_Report.zip
