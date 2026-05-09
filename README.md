@@ -1,7 +1,7 @@
 # Fine-Tuning SmolVLM for Science Visual Question Answering
 
 **Course:** Deep Learning (NYU, Spring 2026)  
-**Author:** Prabhjeet Singh (ps5351@nyu.edu)  
+**Author:** Prabhjeet Singh (ps5390@nyu.edu)  
 **Kaggle Competition:** Pixels to Predictions  
 **Best Score:** 0.92555 accuracy (Solution 21)
 
