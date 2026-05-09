@@ -90,7 +90,7 @@ All experiments were run on Google Colab.
     └── submission-0.90744.csv
 ```
 
-Each `solutionN/` directory contains the Jupyter notebook and the Kaggle submission CSV. Checkpoint and adapter zips are excluded from the repo due to size (available on request).
+Each `solutionN/` directory contains the Jupyter notebook and the Kaggle submission CSV. The best-performing weights (all 6 per-epoch LoRA adapters from Solution 19) are included in `best_solution/checkpoints/` and can be used directly to reproduce the best submission without retraining.
 
 ## Results
 
